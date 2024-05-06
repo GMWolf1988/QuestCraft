@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerState : MonoBehaviour, IPlayerStateEvents
 {
@@ -20,6 +22,10 @@ public class PlayerState : MonoBehaviour, IPlayerStateEvents
     public PlayerStatePanel PlayerStatePanel;
     public EventTitles EventTitles;
     public TravelText TravelText;
+
+    public GameObject ProceduralCodeNum;
+    public GameObject HandcraftedCodeNum;
+    private QuestState questState; // Reference to QuestState script
 
     public int XP = 1000;
     public int Gold = 0;
@@ -111,10 +117,35 @@ public class PlayerState : MonoBehaviour, IPlayerStateEvents
         {
              // Capture the end time when the game finishes
             endTime = DateTime.Now;
-
-            WinPanel.SetActive(true);
             WritePlayerReport();
+            StartCoroutine(ActivateWinPanelWithDelay(2f));  
         }
+    }
+
+    private System.Collections.IEnumerator ActivateWinPanelWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        WinPanel.SetActive(true);
+        StartCoroutine(LoadMainMenuAfterDelay(6f));
+
+        if (questState != null)
+        {
+            if (questState.Mode == 0)
+            {
+                ProceduralCodeNum.SetActive(true);
+            }
+            else
+            {
+                HandcraftedCodeNum.SetActive(true);
+            }
+        } 
+    }
+
+    // Coroutine to load the main menu scene after a delay
+    private System.Collections.IEnumerator LoadMainMenuAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("MainMenu"); 
     }
 
     void WritePlayerReport()

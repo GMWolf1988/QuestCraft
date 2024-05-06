@@ -56,6 +56,7 @@ public class QuestState : MonoBehaviour, IQuestStateEvents
         }
     }
 
+
     private void Update()
     {
         EnsureMinimumQuests();
