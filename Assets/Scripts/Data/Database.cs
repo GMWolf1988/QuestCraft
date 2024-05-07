@@ -270,7 +270,8 @@ public static class Database
         new ObjectiveReason("as a gift for their son.", new List<string>() { "collect" }),
         new ObjectiveReason("as a gift for their daughter.", new List<string>() { "collect" }),
         new ObjectiveReason("to fulfill a customer's order.", new List<string>() { "collect" }),
-        new ObjectiveReason("because they attacked a supplier on the road last night.", new List<string>() { "kill" }),
+        new ObjectiveReason("As tranquility of the night was shattered by a brazen assault, leaving a supplier battered and  on the verge of death." +
+        "Justice demands retribution for the harm inflicted upon anyone.", new List<string>() { "kill" }),
         new ObjectiveReason("after they stole a very valuable shipment.", new List<string>() { "kill" }),
     };
 

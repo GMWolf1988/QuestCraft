@@ -23,79 +23,86 @@ public class QuestState : MonoBehaviour, IQuestStateEvents
 
     public readonly List<Quest> CompletedQuests = new List<Quest>();
 
-    public int Mode;
+ // Public property to access the current mode, but only privately set
+public int Mode { get; private set; }
 
-    private void Awake()
+// Unity's Awake function, called when the object is initialized
+private void Awake()
+{
+    // Check if there's no existing instance of this object
+    if (instance == null)
+        // If not, set this instance as the singleton instance
+        instance = this;
+
+    // Create a new instance of System.Random for generating random numbers
+    System.Random random = new System.Random();
+
+    // Generate a random number between 0 (inclusive) and 2 (exclusive) and assign it to Mode
+    Mode = random.Next(2);
+
+    // If Mode is 0
+    if (Mode == 0)
     {
-        if (instance == null)
-            instance = this;
-        
-        System.Random random = new System.Random();
-        // TODO: uncomment this and remove Mode = 1;
-        Mode = random.Next(2);
-        //Mode = 1;
-
-        if (Mode == 0)
-        {
-            AddProceduralQuest();
-        }
-
-        //    while (_seenQuests.Count < questsToGenerate)
-        //    {
-        //        Quest quest = new Quest(true);
-        //        if (!_seenQuests.Contains(quest.Title))
-        //        {
-        //            _seenQuests.Add(quest.Title);
-        //            _availableQuests.Add(quest);
-        //        }
-        //    }
-        //}
-        else
-        {
-            AddHandmadeQuests();
-        }
+        // Call a function to add procedural quests
+        AddProceduralQuest();
     }
-
-
-    private void Update()
+    // If Mode is not 0 (it's 1)
+    else
     {
-        EnsureMinimumQuests();
+        // Call a function to add handmade quests
+        AddHandmadeQuests();
     }
+}
 
-    void EnsureMinimumQuests()
+
+    // Update method called every frame
+private void Update()
+{
+    EnsureMinimumQuests(); // Ensure minimum number of quests are available
+}
+
+// Method to ensure minimum number of quests are available
+void EnsureMinimumQuests()
+{
+    int minimumQuests = 8; // Minimum number of quests to maintain
+    int maximumQuests = 12; // Maximum number of quests allowed
+
+    // If the current count is below the minimum, add quests up to the maximum limit
+    if (_availableQuests.Count < minimumQuests)
     {
-        int minimumQuests = 8; // Minimum number of quests to maintain
-        int maximumQuests = 12; // Maximum number of quests allowed
-
-        // If the current count is below the minimum, add quests up to the maximum limit
-        if (_availableQuests.Count < minimumQuests)
+        // Calculate number of quests to add
+        int questsToAdd = Mathf.Min(maximumQuests - _availableQuests.Count, maximumQuests);
+        // Loop to add quests
+        for (int i = 0; i < questsToAdd; i++)
         {
-            int questsToAdd = Mathf.Min(maximumQuests - _availableQuests.Count, maximumQuests);
-            for (int i = 0; i < questsToAdd; i++)
-            {
-                Quest quest = new Quest(true);
-                if (!_seenQuests.Contains(quest.Title))
-                {
-                    _seenQuests.Add(quest.Title);
-                    _availableQuests.Add(quest);
-                }
-            }
-        }
-    }
-
-    void AddProceduralQuest()
-    {
-        int questsToGenerate = 12; // Generates number of procedural quests
-        for (int i = 0; i < questsToGenerate; i++)
-        {
-            Quest quest = new Quest(true);
+            Quest quest = new Quest(true); // Create new quest
+            // Check if the quest has not been seen before
             if (!_seenQuests.Contains(quest.Title))
             {
-                _seenQuests.Add(quest.Title);
-                _availableQuests.Add(quest);
+                _seenQuests.Add(quest.Title); // Add quest title to seen list
+                _availableQuests.Add(quest); // Add quest to available quests
             }
         }
     }
+}
+
+// Method to add procedural quests
+void AddProceduralQuest()
+{
+    int questsToGenerate = 12; // Generates number of procedural quests
+    // Loop to generate procedural quests
+    for (int i = 0; i < questsToGenerate; i++)
+    {
+        Quest quest = new Quest(true); // Create new quest
+        // Check if the quest has not been seen before
+        if (!_seenQuests.Contains(quest.Title))
+        {
+            _seenQuests.Add(quest.Title); // Add quest title to seen list
+            _availableQuests.Add(quest); // Add quest to available quests
+        }
+    }
+}
+
 
     void AddHandmadeQuests()
     {
@@ -647,45 +654,52 @@ public class QuestState : MonoBehaviour, IQuestStateEvents
             quest16.Rewards.Add(Database.Rewards[1]);
             quest16.RewardQuantities.Add(750);
 
-            // QUEST CHAIN DEFINE START - GATHER 4
-            Quest quest15 = new Quest(false, true, () => _availableQuests.Add(quest16))
-            {
-                Status = QuestStatus.Available,
-                QuestGiverLocation = Database.Locations[4],
-                Title = "Nature's Wraith - Part I",
-                Description = " HAIL ADVENTURERS! \n \n" +
-                "A kobold sharman took me by surprise on my travels to the old temple within the forest. " +
-                "The beings power was too much for myself, and I was lucky to get away. However, I want your help to get pay back. " +
-                "I'm going to craft a potion which will boost intelligence, to give you an edge in the fight to come. But first i need a few ingridents. " +
-                "Go to the caves and gather blood moss, and on your way back gather me some berries. You can find these in the bushes that grown around the fortress \n \n" +
-                "Pike Greenleaf - Druid \n \n" 
-               // "<b>HINT:</b>"
-            };
+    // Define a new quest titled "Nature's Wraith - Part I" which involves gathering ingredients for Pike Greenleaf, a Druid.
+    // The quest is initiated by encountering Pike Greenleaf at Location 4.
+    // If this quest is completed, it will unlock Quest 16.
 
-            Objective objective18 = new Objective(false)
-            {
-                Type = ObjectiveType.Gather,
-                Quantity = 5,
-                Target = Database.Gatherables[5],
-                Source = Database.Locations[9],
-            };
+    Quest quest15 = new Quest(false, true, () => _availableQuests.Add(quest16))
+    {
+        Status = QuestStatus.Available,
+         QuestGiverLocation = Database.Locations[4],
+        Title = "Nature's Wraith - Part I",
+        Description = " HAIL ADVENTURERS! \n \n" +
+         "A kobold sharman took me by surprise on my travels to the old temple within the forest. " +
+        "The beings power was too much for myself, and I was lucky to get away. However, I want your help to get pay back. " +
+        "I'm going to craft a potion which will boost intelligence, to give you an edge in the fight to come. But first i need a few ingridents. " +
+        "Go to the caves and gather blood moss, and on your way back gather me some berries. You can find these in the bushes that grown around the fortress \n \n" +
+        "Pike Greenleaf - Druid \n \n" 
+    };
 
-             Objective objective19 = new Objective(false)
-            {
-                Type = ObjectiveType.Gather,
-                Quantity = 5,
-                Target = Database.Gatherables[3],
-                Source = Database.Locations[10],
-            };
+    // Define objectives for gathering ingredients.
+    Objective objective18 = new Objective(false)
+    {
+        Type = ObjectiveType.Gather,
+         Quantity = 5,
+        Target = Database.Gatherables[5], // Blood Moss
+        Source = Database.Locations[9], // Caves
+    };
 
-            quest15.Objectives.Add(objective18);
-            quest15.Objectives.Add(objective19);
-            quest15.Rewards.Add(Database.Rewards[0]);
-            quest15.RewardQuantities.Add(300);
-            quest15.Rewards.Add(Database.Rewards[1]);
-            quest15.RewardQuantities.Add(350);
+    Objective objective19 = new Objective(false)
+    {
+        Type = ObjectiveType.Gather,
+         Quantity = 5,
+        Target = Database.Gatherables[3], // Berries
+        Source = Database.Locations[10], // Bushes around the fortress
+    };
 
-            _availableQuests.Add(quest15);
+    // Add objectives to the quest.
+    quest15.Objectives.Add(objective18);
+    quest15.Objectives.Add(objective19);
+
+    // Add rewards to the quest.
+    quest15.Rewards.Add(Database.Rewards[0]); // Gold reward
+    quest15.RewardQuantities.Add(300);
+    quest15.Rewards.Add(Database.Rewards[1]); // Experience reward
+    quest15.RewardQuantities.Add(350);
+
+    // Add the quest to available quests.
+    _availableQuests.Add(quest15);
         }
     }
     

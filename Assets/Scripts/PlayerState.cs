@@ -128,17 +128,22 @@ public class PlayerState : MonoBehaviour, IPlayerStateEvents
         WinPanel.SetActive(true);
         StartCoroutine(LoadMainMenuAfterDelay(6f));
 
+        // Check if questState is not null
         if (questState != null)
         {
+            // If questState's Mode is 0
             if (questState.Mode == 0)
             {
+                // Activate ProceduralCodeNum GameObject
                 ProceduralCodeNum.SetActive(true);
             }
+            // If questState's Mode is not 0
             else
             {
-                HandcraftedCodeNum.SetActive(true);
+                 // Activate HandcraftedCodeNum GameObject
+                 HandcraftedCodeNum.SetActive(true);
             }
-        } 
+        }
     }
 
     // Coroutine to load the main menu scene after a delay
@@ -148,21 +153,30 @@ public class PlayerState : MonoBehaviour, IPlayerStateEvents
         SceneManager.LoadScene("MainMenu"); 
     }
 
-    void WritePlayerReport()
+    // Method to generate a player report including session ID, game mode, completed quests, XP, gold, and time elapsed
+void WritePlayerReport()
 {
+    // Generate a unique session ID
     Guid sessionID = Guid.NewGuid();
+    
+    // Determine the game mode based on the current QuestState mode
     string mode = QuestState.instance.Mode == 0 ? "Procedural" : "Handmade";
+    
+    // Create a report string with session ID, game mode, completed quests count, XP, and gold
     string report = $"Session ID: {sessionID}\n" +
                     $"Game mode: {mode}\n" +
                     $"Quests completed: {QuestState.instance.CompletedQuests.Count}\n" +
                     $"Total XP: {XP}\n" +
                     $"Total gold: {Gold}\n";
 
-    // Calculate the time elapsed and format it as minutes:seconds
+    // Calculate the time elapsed between start and end time and format it as minutes:seconds
     TimeSpan elapsedTime = endTime - startTime;
     string timeElapsed = $"Time elapsed: {elapsedTime.Minutes:D2}:{elapsedTime.Seconds:D2}\n";
+    
+    // Add time elapsed to the report
     report += timeElapsed;
 
+    // Write the report to a text file with the session ID as filename
     System.IO.File.WriteAllText($"PlayerReport_{sessionID}.txt", report);
-}
+    }
 }
