@@ -260,19 +260,34 @@ public static class Database
 
     public static List<ObjectiveReason> ObjectiveReasons = new List<ObjectiveReason>()
     {
-        new ObjectiveReason("to forge new equipment.", new List<string>() { "gather", "cave" }),
-        new ObjectiveReason("for repairing a customer's equipment.", new List<string>() { "gather", "cave" }),
-        new ObjectiveReason("for repairs to the building.", new List<string>() { "gather", "forest" }),
-        new ObjectiveReason("to make new stock.", new List<string>() { "gather", "forest" }),
-        new ObjectiveReason("for a new potion recipe.", new List<string>() { "gather", "plains" }),
-        new ObjectiveReason("to make a salve.", new List<string>() { "gather", "plains" }),
-        new ObjectiveReason("to help defend the road after recent attacks.", new List<string>() { "collect" }),
-        new ObjectiveReason("as a gift for their son.", new List<string>() { "collect" }),
-        new ObjectiveReason("as a gift for their daughter.", new List<string>() { "collect" }),
-        new ObjectiveReason("to fulfill a customer's order.", new List<string>() { "collect" }),
+        new ObjectiveReason("to forge new equipment. I'm working on new equipment that will be better equip anyone. Do this task for me " +
+        "and you shall be rewarded.", new List<string>() { "gather", "cave" }),
+        new ObjectiveReason("for repairing a customer's equipment. A customer came in the other day none to happ as his equipment broke. I " +
+        "need these last few things to get this equipment back in order.", new List<string>() { "gather", "cave" }),
+        new ObjectiveReason("for repairs to the building. As you can see the building is falling apart. Please help me with this task" +
+        "and i shall be greatly thankful for your help. ", new List<string>() { "gather", "forest" }),
+        new ObjectiveReason("to make new stock. Our stock is running awefully low and no one is will to help. It would only take" +
+        " a moment of your time. Please help me with this task.", new List<string>() { "gather", "forest" }),
+        new ObjectiveReason("for a new potion recipe. This next batch of potions will cure you of anything so I'm told" +
+        "Do this task for me and i shall be greatly appreciated.", new List<string>() { "gather", "plains" }),
+        new ObjectiveReason("to make a salve. Our latest salve could only cure rashes, this next batch could actually save peoples' lifes" +
+        " Do this for me and you shall be rewarded.", new List<string>() { "gather", "plains" }),
+        new ObjectiveReason("to help defend the road after recent attacks. Attacks on the road have been recent and this will " +
+        "help us defend ourselves that much better, by giving us the edge in future fights.", new List<string>() { "collect" }),
+        new ObjectiveReason("as a gift for their son. Thier son has turn 13 and has asked for this gift for his birthday" +
+        " please do this for me, and you will be rewarded. Don't let the parents down", new List<string>() { "collect" }),
+        new ObjectiveReason("as a gift for their daughter. Thier daughter has turn 15 and has asked for this gift for her birthday" +
+        " please do this for me, and you will be rewarded. Don't let the grandparents down." , new List<string>() { "collect" }),
+        new ObjectiveReason("to fulfill a customer's order. A very important order has come in and is very beneficial to all involved. Please complete the order "
+        + "so that this doesn't look bad on myself.", new List<string>() { "collect" }),
         new ObjectiveReason("As tranquility of the night was shattered by a brazen assault, leaving a supplier battered and  on the verge of death." +
         "Justice demands retribution for the harm inflicted upon anyone.", new List<string>() { "kill" }),
-        new ObjectiveReason("after they stole a very valuable shipment.", new List<string>() { "kill" }),
+        new ObjectiveReason("after they stole a very valuable shipment dead of night. Go find this shipment and bring vengence on those " +
+        "that have wrong us.", new List<string>() { "kill" }),
+        new ObjectiveReason("after they killed my mother. I want vengenace. Go find these beings and bring them a swift death. " +
+        "I can then bury my mother in peace.", new List<string>() { "kill" }),
+        new ObjectiveReason("after they killed my father. I want vengenace. Go find these beings and bring them a swift death. " +
+        "I can then bury my father in peace.", new List<string>() { "kill" }),
     };
 
     public static List<ObjectiveReason> GetAllObjectiveReasonsWithTags(List<string> tags)
