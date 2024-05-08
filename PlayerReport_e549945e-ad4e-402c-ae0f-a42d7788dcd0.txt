@@ -1,6 +1,0 @@
-Session ID: e549945e-ad4e-402c-ae0f-a42d7788dcd0
-Game mode: Procedural
-Quests completed: 1
-Total XP: 1000
-Total gold: 350
-Time elapsed: 00:32

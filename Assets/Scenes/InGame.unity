@@ -2470,7 +2470,7 @@ MonoBehaviour:
   HandcraftedCodeNum: {fileID: 1564095774}
   XP: 1000
   Gold: 0
-  TargetGold: 100
+  TargetGold: 4000
   MaxLevel: 99
 --- !u!4 &933859320
 Transform:
@@ -4764,7 +4764,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestList: {fileID: 267952932}
   EventTitles: {fileID: 375377622}
-  Mode: 0
 --- !u!4 &1530828410
 Transform:
   m_ObjectHideFlags: 0
