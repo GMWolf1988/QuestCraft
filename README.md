@@ -6,9 +6,6 @@ Welcome to the **QuestCraft** repository! I developed this game as part of a dis
 
 <img width="1859" height="1064" alt="Screenshot 2026-01-23 150431" src="https://github.com/user-attachments/assets/cbf4840c-ee6b-4e96-82c3-4849b807ef51" />
 
-<img width="1903" height="1069" alt="Screenshot 2026-01-23 150608" src="https://github.com/user-attachments/assets/57293858-ba4a-4092-82de-0528e7c1e96a" />
-
-
 ## 🛠️ Technologies Used
 
 - **Unity**: 
