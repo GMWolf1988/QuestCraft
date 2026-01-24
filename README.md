@@ -1,6 +1,8 @@
 # QuestCraft
 
-Welcome to the **QuestCraft** repository! I developed this game as part of a dissertation to explore the effectiveness of procedural generation (PCG) in quest design within the gaming industry. QuestCraft utilizes Unity and C# to create quests through procedural generation using tags.
+Welcome to my **QuestCraft** repository! 
+
+I developed this game as part of a dissertation to explore the effectiveness of procedural generation (PCG) in quest design within the gaming industry. QuestCraft utilizes Unity and C# to create quests through procedural generation using tags.
 
 <img width="1901" height="1074" alt="Screenshot 2026-01-23 150402" src="https://github.com/user-attachments/assets/30acb0fd-0fdc-4e94-8f46-a1415031bfd1" />
 
